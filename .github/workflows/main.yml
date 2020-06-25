@@ -38,6 +38,7 @@ jobs:
         # Set the sonar.projectBaseDir analysis property
 #         projectBaseDir: # optional, default is .
         # Login or authentication token of a SonarQube user
-        login: 6fe692c1b95d69a9de6391f87a8ce3b1658df87d 
+        login: 6fe692c1b95d69a9de6391f87a8ce3b1658df87d
+        sonar.organization: kamalpatra62
         # Password that goes with the sonar.login username. This should be left blank if an authentication token is being used.
 #         password: # optiona
