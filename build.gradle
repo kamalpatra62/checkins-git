@@ -19,11 +19,7 @@ plugins {
 
 apply plugin: "org.sonarqube"
 
-// sonarqube {
-//     properties {
-//         property "sonar.sourceEncoding", "UTF-8"
-//     }
-// }
+
 
 sonarqube {
   properties {
@@ -35,6 +31,13 @@ sonarqube {
     property "sonar.login", "6fe692c1b95d69a9de6391f87a8ce3b1658df87d"
   }
 }
+
+
+// sonarqube {
+//     properties {
+//         property "sonar.sourceEncoding", "UTF-8"
+//     }
+// }
 
 task copyClientResources(dependsOn: ':web-ui:build') { 
     group = 'build'
