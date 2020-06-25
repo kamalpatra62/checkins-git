@@ -54,15 +54,16 @@ jobs:
           uses: actions/setup-java@v1
           with:
             java-version: 1.8
-        - name: download sonar
-          uses: sonarsource/sonarcloud-github-action@master 
-          env:
-            GITHUB_TOKEN: 68e69ddb3c770e60cbc1427c05af280604177db3
-            SONAR_TOKEN: 6fe692c1b95d69a9de6391f87a8ce3b1658df87d
+        # - name: download sonar
+        #   uses: sonarsource/sonarcloud-github-action@master 
+          
         - name: Grant execute permission for gradlew
           run: chmod +x gradlew
         - name: SonarCloud Scan
           # uses: sonarsource/sonarcloud-github-action@master
           run: ./gradlew sonarqube
+          env:
+            GITHUB_TOKEN: 68e69ddb3c770e60cbc1427c05af280604177db3
+            SONAR_TOKEN: 6fe692c1b95d69a9de6391f87a8ce3b1658df87d
           
       
