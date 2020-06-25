@@ -25,14 +25,14 @@ sonarqube {
     }
 }
 
-sonarqube {
-  properties {
-    property "sonar.projectKey", "kamalpatra62_Doctor-prescription"
-    property "sonar.organization", "kamalpatra62"
-    property "sonar.host.url", "https://sonarcloud.io"
-    property "sonar.login", "51219c07047067d0849b8584584e0766d259fd3c"
-  }
-}
+// sonarqube {
+//   properties {
+//     property "sonar.projectKey", "kamalpatra62_Doctor-prescription"
+//     property "sonar.organization", "kamalpatra62"
+//     property "sonar.host.url", "https://sonarcloud.io"
+//     property "sonar.login", "51219c07047067d0849b8584584e0766d259fd3c"
+//   }
+// }
 
 task copyClientResources(dependsOn: ':web-ui:build') { 
     group = 'build'
