@@ -1,6 +1,13 @@
 plugins {
     id "com.github.node-gradle.node" version "2.2.3"
+    // id "org.sonarqube" version "3.0"
 }
+
+// sonarqube {
+//     properties {
+//         property "sonar.sourceEncoding", "UTF-8"
+//     }
+// }
 
 node {
     version = '13.0.1' // https://nodejs.org/en/
