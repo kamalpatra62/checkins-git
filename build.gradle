@@ -1,0 +1,89 @@
+// buildscript {
+//   repositories {
+//     maven {
+//       url "https://plugins.gradle.org/m2/"
+//     }
+//   }
+//   dependencies {
+//     classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.0"
+//   }
+// }
+
+
+
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id "org.sonarqube" version "3.0"
+}
+
+apply plugin: "org.sonarqube"
+
+sonarqube {
+    properties {
+        property "sonar.sourceEncoding", "UTF-8"
+    }
+}
+
+sonarqube {
+  properties {
+    property "sonar.projectKey", "kamalpatra62_Doctor-prescription"
+    property "sonar.organization", "kamalpatra62"
+    property "sonar.host.url", "https://sonarcloud.io"
+    property "sonar.login", "51219c07047067d0849b8584584e0766d259fd3c"
+  }
+}
+
+task copyClientResources(dependsOn: ':web-ui:build') { 
+    group = 'build'
+    description = 'Copy web-ui resources into server'
+}
+
+copyClientResources.doFirst { 
+    copy {
+        from project(':web-ui').buildDir.absolutePath
+        into "${project(':server').buildDir}/resources/main/public"
+    }
+}
+
+task assembleServerAndClient(dependsOn: ['copyClientResources', ':server:shadowJar']) { 
+    group = 'build'
+    description = 'Build combined server & client JAR'
+}
+
+// task test {
+
+// }
+
+
+// task check {
+
+// }
+
+publishing {
+     publications {
+        checkInsProject(MavenPublication) {
+            version "0.1"
+            group "com.objectcomputing.checkins"         
+            from components.java
+            
+        }
+    }
+
+    repositories {
+        maven {
+            name = "CheckInsProject"
+            url = "https://maven.pkg.github.com/oci-labs/check-ins"
+            credentials {
+            username = System.getenv("GITHUB_ACTOR")!=null?System.getenv("GITHUB_ACTOR"):"OCI-LABS"
+            password = System.getenv("GITHUB_TOKEN")!=null?System.getenv("GITHUB_TOKEN"):"OCI-LABS"
+            }
+        }
+    }
+}
+
+
+
+
+
+
