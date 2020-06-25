@@ -39,10 +39,10 @@ jobs:
         run: chmod +x gradlew
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
-        # run: ./gradlew assembleServerAndClient -Psonar -Dsonar.login=6fe692c1b95d69a9de6391f87a8ce3b1658df87d
+        run: ./gradlew assembleServerAndClient -Psonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=kamalpatra62_checkins-git -Dsonar.organization=kamalpatra62  -Dsonar.login=6fe692c1b95d69a9de6391f87a8ce3b1658df87d
         env:
           GITHUB_TOKEN: 68e69ddb3c770e60cbc1427c05af280604177db3
-          SONAR_TOKEN: 6fe692c1b95d69a9de6391f87a8ce3b1658df87d
+          # SONAR_TOKEN: 6fe692c1b95d69a9de6391f87a8ce3b1658df87d
           
   # artifact:
   #   name: Publish - GitHub Packages
