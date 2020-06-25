@@ -13,37 +13,37 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+#   build:
+#     # The type of runner that the job will run on
+#     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+#     # Steps represent a sequence of tasks that will be executed as part of the job
+#     steps:
+#     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+#     - uses: actions/checkout@v2
 
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
-      run: echo Hello, world!
+#     # Runs a single command using the runners shell
+#     - name: Run a one-line script
+#       run: echo Hello, world!
 
-    # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
-    - name: SonarQube Scanner
-      uses: ItsEcholot/sonarqube-action@v0.0.2
-      env:
-        GITHUB_TOKEN: 68e69ddb3c770e60cbc1427c05af280604177db3
-        SONAR_TOKEN: 6fe692c1b95d69a9de6391f87a8ce3b1658df87d
-      with:
-        host: https://sonarcloud.io
-        # Set the sonar.projectBaseDir analysis property
-#         projectBaseDir: # optional, default is .
-        # Login or authentication token of a SonarQube user
-        login: 6fe692c1b95d69a9de6391f87a8ce3b1658df87d
-        # Password that goes with the sonar.login username. This should be left blank if an authentication token is being used.
-#         password: # optiona
+#     # Runs a set of commands using the runners shell
+#     - name: Run a multi-line script
+#       run: |
+#         echo Add other actions to build,
+#         echo test, and deploy your project.
+#     - name: SonarQube Scanner
+#       uses: ItsEcholot/sonarqube-action@v0.0.2
+#       env:
+#         GITHUB_TOKEN: 68e69ddb3c770e60cbc1427c05af280604177db3
+#         SONAR_TOKEN: 6fe692c1b95d69a9de6391f87a8ce3b1658df87d
+#       with:
+#         host: https://sonarcloud.io
+#         # Set the sonar.projectBaseDir analysis property
+# #         projectBaseDir: # optional, default is .
+#         # Login or authentication token of a SonarQube user
+#         login: 6fe692c1b95d69a9de6391f87a8ce3b1658df87d
+#         # Password that goes with the sonar.login username. This should be left blank if an authentication token is being used.
+# #         password: # optiona
   sonar:
       name: Test - SonarCloud Scan
       runs-on: ubuntu-18.04
@@ -56,12 +56,13 @@ jobs:
             java-version: 1.8
         - name: download sonar
           uses: sonarsource/sonarcloud-github-action@master 
+          env:
+            GITHUB_TOKEN: 68e69ddb3c770e60cbc1427c05af280604177db3
+            SONAR_TOKEN: 6fe692c1b95d69a9de6391f87a8ce3b1658df87d
         - name: Grant execute permission for gradlew
           run: chmod +x gradlew
         - name: SonarCloud Scan
           # uses: sonarsource/sonarcloud-github-action@master
           run: ./gradlew sonarqube
-          env:
-            GITHUB_TOKEN: 68e69ddb3c770e60cbc1427c05af280604177db3
-            SONAR_TOKEN: 6fe692c1b95d69a9de6391f87a8ce3b1658df87d
+          
       
